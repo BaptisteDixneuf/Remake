@@ -18,9 +18,7 @@ function handler (req, res) {
   });
 }
 
+//Chaque utilisateur a un socket
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+  console.log('Nouveau utilisateur');
 });

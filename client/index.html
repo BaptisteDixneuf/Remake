@@ -17,10 +17,6 @@
 <script src="http://localhost:80/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://localhost');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
 </script>
 <script src="js/client.js"></script>
 
