@@ -60,16 +60,14 @@ io.on "connection", (socket) ->
   socket.on "deplacement", (data)->
     deplacement_joueur(data.idjoueur,data.direction)
     io.sockets.emit("deplacement_joueur",data)  
-    false
+    console.log "Déplacement Joueur"
 
   #Déconnexion joueur
-  socket.on "disconnect", ()->
-    console.log(joueurs)
-    console.log(idjoueur)
+  socket.on "disconnect", ()->   
     joueurs[idjoueur]=null
     io.sockets.emit("deconnexion",idjoueur)
     console.log "Joueur déconnecté"
-    console.log(joueurs)
+    
 
 
   return
