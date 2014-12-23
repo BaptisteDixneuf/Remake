@@ -2,14 +2,25 @@
 idjoueur=null;
 joueurs=[]
 
+deplacement_joueur =(id,direction)->
+  if(direction is "haut") then joueurs[id].y=joueurs[id].y+1
+  if(direction is "bas") then joueurs[id].y=joueurs[id].y-1
+  if(direction is "droite") then joueurs[id].x=joueurs[id].x+1
+  if(direction is "gauche") then joueurs[id].x=joueurs[id].x-1
+  
+
 socket.on "init_joueur",(liste_joueurs) ->
 	joueurs=liste_joueurs
-	idjoueur=liste_joueurs.length
-	console.log("Liste des joueurs init")
+	idjoueur=liste_joueurs.length-1
+	console.log("Réception : Liste des joueurs init")
 
 socket.on "nouveau_joueur",(nouveauJoueur) ->
 	joueurs.push nouveauJoueur
-	console.log("Nouveau Joueur ajouté")
+	console.log("Réception: Nouveau Joueur ajouté")
+
+socket.on "deplacement_joueur",(data) ->
+	deplacement_joueur(data.idjoueur,data.direction)
+	console.log("Réception: deplacement")
 
 
 controle_clavier = ->
@@ -61,7 +72,8 @@ controle_clavier = ->
 
 controle_clavier()
 
-deplacement = (direction) ->
+deplacement = (direction) ->	
 	socket.emit "deplacement",{idjoueur,direction}
+	false
 
 

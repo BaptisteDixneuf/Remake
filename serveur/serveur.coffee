@@ -31,6 +31,15 @@ class Joueur
     this.x=0
     this.y=0;
 
+
+deplacement_joueur =(id,direction)->
+  if(direction is "haut") then joueurs[id].y=joueurs[id].y+1
+  if(direction is "bas") then joueurs[id].y=joueurs[id].y-1
+  if(direction is "droite") then joueurs[id].x=joueurs[id].x+1
+  if(direction is "gauche") then joueurs[id].x=joueurs[id].x-1
+  
+
+
 compteurJoueur=0
 
 #Gestion des sockets
@@ -39,10 +48,9 @@ io.on "connection", (socket) ->
   #Génération du nouvelle utilisateur
   console.log "Nouveau utilisateur"
   idjoueur=compteurJoueur
-  compteurJoueur++
   nouveauJoueur = new Joueur(idjoueur) 
-  joueurs.push nouveauJoueur
-  
+  compteurJoueur++  
+  joueurs.push nouveauJoueur  
 
   #Gestion des joueurs
   socket.emit "init_joueur",joueurs
@@ -50,7 +58,8 @@ io.on "connection", (socket) ->
 
   #Deplacement Joueur 
   socket.on "deplacement", (data)->
-    console.log(data)    
+    deplacement_joueur(data.idjoueur,data.direction)
+    io.sockets.emit("deplacement_joueur",data)  
     false
 
   return
