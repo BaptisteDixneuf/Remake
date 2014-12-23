@@ -1,6 +1,6 @@
 // Taille du canvas
-var canvasWidth = 2048;
-var canvasHeight = 1536;
+var canvasWidth = 1024;
+var canvasHeight = 768;
 
 // CrÃ©ation du Stage
 var stage = new PIXI.Stage(0x000000);
@@ -84,7 +84,7 @@ function generateMap(width, height, tileMin, tileMax) {
 }
 
 // GÃ©nÃ©ration de la carte alÃ©atoire
-var map = generateMap(20, 20, 0, 10);
+var map = generateMap(10, 10, 0, 10);
 
 // DÃ©calage perso
 var offset = {
