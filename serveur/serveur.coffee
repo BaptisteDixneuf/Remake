@@ -31,23 +31,26 @@ class Joueur
     this.x=0
     this.y=0;
 
+compteurJoueur=0
+
 #Gestion des sockets
 io.on "connection", (socket) ->
 
   #Génération du nouvelle utilisateur
-    console.log "Nouveau utilisateur"
-  id=uniqueId(20)
-  nouveauJoueur = new Joueur(id)
+  console.log "Nouveau utilisateur"
+  idjoueur=compteurJoueur
+  compteurJoueur++
+  nouveauJoueur = new Joueur(idjoueur) 
   joueurs.push nouveauJoueur
+  
 
   #Gestion des joueurs
   socket.emit "init_joueur",joueurs
   socket.broadcast.emit "nouveau_joueur",nouveauJoueur
 
-  #Deplacement Joueur
-
-
-  
-  
+  #Deplacement Joueur 
+  socket.on "deplacement", (data)->
+    console.log(data)    
+    false
 
   return
