@@ -36,6 +36,11 @@ socket.on("deplacement_joueur", function(data) {
   return console.log("Réception: deplacement");
 });
 
+socket.on("deconnexion", function(data) {
+  joueurs[data] = null;
+  return console.log("Réception: Joueur déconnecté");
+});
+
 controle_clavier = function() {
   var blocage;
   blocage = 1;

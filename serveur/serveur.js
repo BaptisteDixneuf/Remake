@@ -78,4 +78,12 @@ io.on("connection", function(socket) {
     io.sockets.emit("deplacement_joueur", data);
     return false;
   });
+  socket.on("disconnect", function() {
+    console.log(joueurs);
+    console.log(idjoueur);
+    joueurs[idjoueur] = null;
+    io.sockets.emit("deconnexion", idjoueur);
+    console.log("Joueur déconnecté");
+    return console.log(joueurs);
+  });
 });

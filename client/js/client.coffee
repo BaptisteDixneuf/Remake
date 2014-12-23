@@ -22,6 +22,9 @@ socket.on "deplacement_joueur",(data) ->
 	deplacement_joueur(data.idjoueur,data.direction)
 	console.log("Réception: deplacement")
 
+socket.on "deconnexion",(data) ->	
+	joueurs[data]=null
+	console.log("Réception: Joueur déconnecté")
 
 controle_clavier = ->
   
